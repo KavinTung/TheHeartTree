@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     <title>KAVIN YÊU VỢ THỎ</title>
 
-    <link rel="stylesheet" href="./renxi/default.css">
+    <link rel="stylesheet" href="./renxi/default.css?v=20260624-2">
     <link rel="stylesheet" href="./renxi/scroll.css">
 
     <!-- Giữ nguyên thứ tự thư viện để tránh ảnh hưởng hiệu ứng Jscex cũ -->
@@ -18,7 +18,7 @@
     <script src="./renxi/jscex-builderbase.min.js"></script>
     <script src="./renxi/jscex-async.min.js"></script>
     <script src="./renxi/jscex-async-powerpack.min.js"></script>
-    <script src="./renxi/functions.js" charset="utf-8"></script>
+    <script src="./renxi/functions.js?v=20260624-3" charset="utf-8"></script>
     <script src="./renxi/love.js" charset="utf-8"></script>
 
     <style>
@@ -91,7 +91,7 @@
         <div id="wrap">
             <div id="text">
                 <div id="code" class="love-message">
-                    <span class="say">Vợ Thỏ ơi,</span><br>
+                    <span class="say"><strong>Vợ Thỏ ơi,</strong></span><br>
                     <span class="say">&nbsp;</span><br>
                     <span class="say">Duyên trời dẫn lối đôi ta</span><br>
                     <span class="say">Hữu duyên hồng trần kiếp này</span><br>
@@ -103,28 +103,28 @@
                     <span class="say">&nbsp;</span><br>
 
                     <span class="say">
-                        <span class="space"></span>
+                        <span class="space"></span><strong>
                         -- Kavin Tùng ❤ Thanh Thỏa --
-                    </span>
+                    </strong></span>
 
                     <br><br><br><br>
 
-                    <span class="say"><strong>© 2021 Mãi Yêu 4T</strong></span><br>
-                    <span class="say"><strong>Facebook:</strong> https://www.facebook.com/Kavi.Gamer/</span><br>
-                    <span class="say"><strong>Đồ họa:</strong> Kavin Tùng</span><br>
+                    <span class="say"><strong>© 2021 Information</strong></span><br>
+                    <span class="say"><strong>Facebook:</strong> FB.com/KavinTung.HR</span><br>
+                    <span class="say"><strong>Motify by:</strong> Kavin Tùng</span><br>
                     <span class="say">
-                        <strong>Src Github:</strong>
-                        <a href="https://github.com/KavinTung/TheHeartTree/" target="_blank" rel="noopener noreferrer">
-                            https://github.com/KavinTung/TheHeartTree/
+                        <strong>Tải code:</strong>
+                        <a href="https://github.com/KavinTung/TheHeartTree/" target="_blank" rel="noopener noreferrer" style="font-weight: bold;">
+                            Github/TheHeartTree
                         </a>
-                    </span>
+                    </span><br>
                 </div>
             </div>
 
             <div id="clock-box">
-                <span class="STYLE1"></span>
-                <span style="color: #FF0000;">Kavin Tùng ❤ Thanh Thỏa</span>
-                <span class="STYLE1"> trong:</span>
+                <span class="STYLE1"></span><br>
+                <span style="color: #FF0000;font-size: 28px">Kavin Tùng ❤ Thanh Thỏa</span>
+                <span class="STYLE1"> trong:</span><br>
                 <div id="clock"></div>
             </div>
 
