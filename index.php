@@ -2,12 +2,12 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
-    <title>KAVIN YÊU VỢ THỎ</title>
+    <title>The Heart Tree by Ka & Thỏ</title>
 
-    <link rel="stylesheet" href="./renxi/default.css?v=20260624-2">
+    <link rel="stylesheet" href="./renxi/default.css?v=20260624-mobile-1">
     <link rel="stylesheet" href="./renxi/scroll.css">
 
     <!-- Giữ nguyên thứ tự thư viện để tránh ảnh hưởng hiệu ứng Jscex cũ -->
@@ -18,7 +18,7 @@
     <script src="./renxi/jscex-builderbase.min.js"></script>
     <script src="./renxi/jscex-async.min.js"></script>
     <script src="./renxi/jscex-async-powerpack.min.js"></script>
-    <script src="./renxi/functions.js?v=20260624-3" charset="utf-8"></script>
+    <script src="./renxi/functions.js?v=20260624-mobile-1" charset="utf-8"></script>
     <script src="./renxi/love.js" charset="utf-8"></script>
 
     <style>
@@ -27,9 +27,10 @@
         }
 
         body {
-            margin: 0;
-            overflow: hidden;
-        }
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
         #music-toggle {
             position: fixed;
@@ -223,11 +224,16 @@
                 return false;
             }
 
-            var width = canvas.width();
-            var height = canvas.height();
+            /*
+ * Canvas gốc luôn giữ 1100 x 680.
+ * CSS chỉ thu nhỏ phần hiển thị trên mobile,
+ * không làm thay đổi kích thước vùng vẽ thật.
+ */
+var width = 1100;
+var height = 680;
 
-            canvas.attr("width", width);
-            canvas.attr("height", height);
+canvas.attr("width", width);
+canvas.attr("height", height);
 
             var opts = {
                 seed: {
@@ -288,25 +294,57 @@
             var foot = tree.footer;
             var hold = 1;
 
-            canvas
-                .on("click", function (event) {
-                    var offset = canvas.offset();
-                    var x = event.pageX - offset.left;
-                    var y = event.pageY - offset.top;
+            /*
+ * Chuyển tọa độ click/chạm trên màn hình
+ * về hệ tọa độ canvas gốc 1100 x 680.
+ * Cần thiết khi canvas bị CSS thu nhỏ trên mobile.
+ */
+function getCanvasPoint(event) {
+    var nativeEvent = event.originalEvent || event;
 
-                    if (seed.hover(x, y)) {
-                        hold = 0;
-                        canvas.off("click mousemove");
-                        canvas.removeClass("hand");
-                    }
-                })
-                .on("mousemove", function (event) {
-                    var offset = canvas.offset();
-                    var x = event.pageX - offset.left;
-                    var y = event.pageY - offset.top;
+    var point = nativeEvent.touches && nativeEvent.touches.length
+        ? nativeEvent.touches[0]
+        : nativeEvent.changedTouches && nativeEvent.changedTouches.length
+            ? nativeEvent.changedTouches[0]
+            : nativeEvent;
 
-                    canvas.toggleClass("hand", seed.hover(x, y));
-                });
+    var rect = canvas[0].getBoundingClientRect();
+
+    return {
+        x: (point.clientX - rect.left) * width / rect.width,
+        y: (point.clientY - rect.top) * height / rect.height
+    };
+}
+
+/*
+ * Desktop: click chuột.
+ * Mobile: chạm vào hạt giống để bắt đầu hiệu ứng.
+ */
+function startTree(event) {
+    var point = getCanvasPoint(event);
+
+    if (seed.hover(point.x, point.y)) {
+        hold = 0;
+
+        canvas.off("click touchstart mousemove");
+        canvas.removeClass("hand");
+
+        if (event.type === "touchstart") {
+            event.preventDefault();
+        }
+    }
+}
+
+canvas
+    .on("click touchstart", startTree)
+    .on("mousemove", function (event) {
+        var point = getCanvasPoint(event);
+
+        canvas.toggleClass(
+            "hand",
+            seed.hover(point.x, point.y)
+        );
+    });
 
             var seedAnimate = eval(Jscex.compile("async", function () {
                 seed.draw();
