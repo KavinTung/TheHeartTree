@@ -169,7 +169,7 @@ a {
 }
 
 .say {
-    margin-left: 5px;
+    margin-left: 0;
 }
 
 .space {
@@ -204,5 +204,154 @@ a {
 
     #clock .digit {
         font-size: 20px;
+    }
+}
+
+/* ==================================================
+   MOBILE LAYOUT – THE HEART TREE
+================================================== */
+
+@media screen and (max-width: 760px) {
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    #main {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    #wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 0 0 28px;
+    }
+
+    /*
+     * Canvas vẫn vẽ ở 1100x680,
+     * nhưng thu nhỏ phần hiển thị theo chiều ngang điện thoại.
+     */
+    #canvas {
+        order: 1;
+        display: block;
+
+        width: 100%;
+        max-width: 760px;
+        height: auto;
+        margin: 0 auto;
+
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+     * Đưa chữ xuống dưới cây thay vì đặt đè tuyệt đối lên canvas.
+     */
+    #text {
+        order: 2;
+        position: relative;
+        top: auto;
+        left: auto;
+
+        width: calc(100% - 32px);
+        max-width: 560px;
+        min-height: 0;
+        height: auto;
+        margin: 10px 16px 0;
+
+        overflow: visible;
+    }
+
+    #code {
+        font-size: clamp(10px, 3.1vw, 14px);
+        line-height: 1.65;
+        white-space: normal;
+    }
+
+    /*
+     * Ghi đè margin-left: 5px cũ ở cuối file CSS.
+     */
+    .say {
+        display: inline-block;
+        max-width: 100%;
+        margin-left: 0 !important;
+        white-space: nowrap;
+        vertical-align: top;
+    }
+
+    .space {
+        margin-right: 0;
+    }
+
+    /*
+     * Đồng hồ đưa xuống dưới lời nhắn.
+     */
+    #clock-box {
+        order: 3;
+        position: relative;
+        top: auto;
+        left: auto;
+
+        width: calc(100% - 32px);
+        max-width: 560px;
+        margin: 14px 16px 8px;
+        padding: 0;
+
+        font-size: clamp(10px, 2.9vw, 14px);
+        line-height: 1.5;
+        text-align: center;
+        white-space: normal;
+    }
+
+    #clock {
+        display: block;
+        margin: 4px 0 0;
+        white-space: nowrap;
+    }
+
+    #clock .digit {
+        font-size: clamp(18px, 5.3vw, 25px);
+    }
+
+    /*
+     * Tên hai người đang có inline font-size: 28px,
+     * nên cần ghi đè riêng trên mobile.
+     */
+    #clock-box span[style] {
+        font-size: clamp(17px, 5vw, 23px) !important;
+    }
+
+    #music-toggle {
+        right: 12px;
+        bottom: 12px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    #code {
+        font-size: 10px;
+    }
+
+    #clock-box {
+        font-size: 10px;
+    }
+
+    #clock .digit {
+        font-size: 17px;
     }
 }
