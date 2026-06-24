@@ -1,15 +1,208 @@
-body{margin:0;padding:0;background:#ffe;font-size:14px;font-family:'å¾®è½¯é›…é»‘','å®‹ä½“',sans-serif;color:#231F20;overflow:auto}
-a {color:#000;font-size:14px;}
-#main{width:100%;}
-#wrap{position:relative;margin:0 auto;width:1100px;height:680px;margin-top:10px;}
-#text{width:400px;height:425px;left:60px;top:80px;position:absolute;}
-#code{display:none;font-size:16px;}
-#clock-box {position:absolute;left:60px;top:550px;font-size:28px;display:none;}
-#clock-box a {font-size:28px;text-decoration:none;}
-#clock{margin-left:48px;}
-#clock .digit {font-size:64px;}
-#canvas{margin:0 auto;width:1100px;height:680px;}
-#error{margin:0 auto;text-align:center;margin-top:60px;display:none;}
-.hand{cursor:pointer;}
-.say{margin-left:5px;}
-.space{margin-right:150px;}
+/* =========================
+   Thiết lập nền tảng
+========================= */
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffe;
+    font-size: 14px;
+    font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+    color: #231F20;
+    overflow: auto;
+}
+
+a {
+    color: #000;
+    font-size: 14px;
+}
+
+/* =========================
+   Bố cục hiệu ứng cây
+========================= */
+#main {
+    width: 100%;
+}
+
+#wrap {
+    position: relative;
+    width: 1100px;
+    height: 680px;
+    margin: 10px auto 0;
+}
+
+/* =========================
+   Khu vực chữ chạy
+========================= */
+#text {
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    width: 470px;
+    min-height: 425px;
+    height: auto;
+    overflow: visible;
+}
+
+#code {
+    display: none;
+    font-size: 16px;
+    line-height: 1.65;
+    white-space: normal;
+}
+
+/*
+  Mỗi .say là một câu riêng.
+  Không cho trình duyệt tự ngắt giữa câu,
+  đồng thời bỏ margin trái cũ để toàn bộ
+  các dòng căn cùng một mép trái.
+*/
+.say {
+    display: inline-block;
+    margin-left: 0;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+#canvas {
+    display: block;
+    width: 1100px;
+    height: 680px;
+    margin: 0 auto;
+}
+/* =========================
+   Responsive cho chữ chạy
+========================= */
+@media screen and (max-width: 1120px) {
+    #text {
+        width: 440px;
+    }
+
+    #code {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #text {
+        width: 410px;
+    }
+
+    #code {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #text {
+        left: 35px;
+        top: 65px;
+        width: auto;
+        max-width: calc(100vw - 70px);
+    }
+
+    #code {
+        font-size: clamp(10px, 3.2vw, 13px);
+        line-height: 1.5;
+    }
+
+    .say {
+        white-space: nowrap;
+    }
+
+    .space {
+        margin-right: 0;
+    }
+}
+/* =========================
+   Đồng hồ tình yêu
+========================= */
+#clock-box {
+    position: absolute;
+    top: 550px;
+    left: 60px;
+
+    /*
+      Giảm từ 28px xuống để cụm:
+      "8+ Năm (3138 ngày ...)"
+      vừa khung tốt hơn.
+    */
+    font-size: 16px;
+    line-height: 1.35;
+    white-space: nowrap;
+    display: none;
+}
+
+#clock-box a {
+    font-size: inherit;
+    text-decoration: none;
+}
+
+#clock {
+    display: inline-block;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+/*
+  Các số ngày/giờ/phút/giây cũ là 64px,
+  khiến nội dung mới quá dài. Giảm xuống 30px
+  để vẫn nổi bật nhưng không tràn bố cục.
+*/
+#clock .digit {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+/* =========================
+   Thành phần khác
+========================= */
+#error {
+    display: none;
+    margin: 60px auto 0;
+    text-align: center;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.say {
+    margin-left: 5px;
+}
+
+.space {
+    margin-right: 150px;
+}
+
+/* =========================
+   Tương thích màn hình nhỏ
+========================= */
+@media screen and (max-width: 1120px) {
+    body {
+        overflow-x: auto;
+    }
+
+    #clock-box {
+        font-size: 14px;
+    }
+
+    #clock .digit {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #clock-box {
+        font-size: 12px;
+    }
+
+    #clock {
+        margin-left: 4px;
+    }
+
+    #clock .digit {
+        font-size: 20px;
+    }
+}
