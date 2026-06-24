@@ -27,11 +27,12 @@ Dự án phù hợp để làm:
 - Landing page cá nhân mang phong cách lãng mạn.
 - Mẫu website hiệu ứng Canvas đơn giản, nhẹ và dễ tùy chỉnh.
 
-**Đối với xem trên Mobile**: Để xem tốt nhất cần bật chế độ "Trang cho Máy tính" trên trình duyệt điện thoại để xem đầy đủ giao diện đẹp, mượt.
+**Đối với xem trên Mobile**: 
+- Để xem tốt nhất cần bật chế độ "Trang cho Máy tính" trên trình duyệt điện thoại để xem đầy đủ giao diện đẹp, mượt.
 ---
 
 ## ✨ Demo
-
+- Xem bản demo tại: ***https://kavil.ink/HeartTree***
 Bạn có thể tùy chỉnh các nội dung sau trong dự án:
 
 - Tên hai người.
